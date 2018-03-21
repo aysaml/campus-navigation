@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-03-20 12:52:47
+Date: 2018-03-21 17:14:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,57 +36,6 @@ INSERT INTO `department` VALUES ('1', '辽宁石油化工大学', '-1', '.1', '1
 INSERT INTO `department` VALUES ('4', '校团委', '1', '.1.4', '1', '1');
 INSERT INTO `department` VALUES ('5', '校学生会', '4', '.1.4.5', '1', '1');
 INSERT INTO `department` VALUES ('8', '计算机与通信工程学院', '5', '.1.4.5.8', '1', '0');
-
--- ----------------------------
--- Table structure for employee
--- ----------------------------
-DROP TABLE IF EXISTS `employee`;
-CREATE TABLE `employee` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '员工编号',
-  `name` varchar(10) DEFAULT NULL COMMENT '员工姓名',
-  `gender` char(4) DEFAULT NULL COMMENT '性别',
-  `birthday` date DEFAULT NULL COMMENT '出生日期',
-  `idCard` char(18) DEFAULT NULL COMMENT '身份证号',
-  `wedlock` enum('已婚','未婚','离异') DEFAULT NULL COMMENT '婚姻状况',
-  `nationId` int(8) DEFAULT NULL COMMENT '民族',
-  `nativePlace` varchar(20) DEFAULT NULL COMMENT '籍贯',
-  `politicId` int(8) DEFAULT NULL COMMENT '政治面貌',
-  `email` varchar(20) DEFAULT NULL COMMENT '邮箱',
-  `phone` varchar(11) DEFAULT NULL COMMENT '电话号码',
-  `address` varchar(64) DEFAULT NULL COMMENT '联系地址',
-  `departmentId` int(11) DEFAULT NULL COMMENT '所属部门',
-  `jobLevelId` int(11) DEFAULT NULL COMMENT '职称ID',
-  `posId` int(11) DEFAULT NULL COMMENT '职位ID',
-  `engageForm` varchar(8) DEFAULT NULL COMMENT '聘用形式',
-  `tiptopDegree` enum('博士','硕士','本科','大专','高中','初中','小学','其他') DEFAULT NULL COMMENT '最高学历',
-  `specialty` varchar(32) DEFAULT NULL COMMENT '所属专业',
-  `school` varchar(32) DEFAULT NULL COMMENT '毕业院校',
-  `beginDate` date DEFAULT NULL COMMENT '入职日期',
-  `workState` enum('在职','离职') DEFAULT '在职' COMMENT '在职状态',
-  `workID` char(8) DEFAULT NULL COMMENT '工号',
-  `contractTerm` double DEFAULT NULL COMMENT '合同期限',
-  `conversionTime` date DEFAULT NULL COMMENT '转正日期',
-  `notWorkDate` date DEFAULT NULL COMMENT '离职日期',
-  `beginContract` date DEFAULT NULL COMMENT '合同起始日期',
-  `endContract` date DEFAULT NULL COMMENT '合同终止日期',
-  `workAge` int(11) DEFAULT NULL COMMENT '工龄',
-  PRIMARY KEY (`id`),
-  KEY `departmentId` (`departmentId`),
-  KEY `jobId` (`jobLevelId`),
-  KEY `dutyId` (`posId`),
-  KEY `nationId` (`nationId`),
-  KEY `politicId` (`politicId`),
-  KEY `workID_key` (`workID`),
-  CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`departmentId`) REFERENCES `department` (`id`),
-  CONSTRAINT `employee_ibfk_2` FOREIGN KEY (`jobLevelId`) REFERENCES `joblevel` (`id`),
-  CONSTRAINT `employee_ibfk_3` FOREIGN KEY (`posId`) REFERENCES `position` (`id`),
-  CONSTRAINT `employee_ibfk_4` FOREIGN KEY (`nationId`) REFERENCES `nation` (`id`),
-  CONSTRAINT `employee_ibfk_5` FOREIGN KEY (`politicId`) REFERENCES `politicsstatus` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1520 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of employee
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for hr
@@ -128,7 +77,7 @@ CREATE TABLE `hr_role` (
   KEY `hr_role_ibfk_1` (`hrid`),
   CONSTRAINT `hr_role_ibfk_1` FOREIGN KEY (`hrid`) REFERENCES `hr` (`id`) ON DELETE CASCADE,
   CONSTRAINT `hr_role_ibfk_2` FOREIGN KEY (`rid`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of hr_role
@@ -137,8 +86,9 @@ INSERT INTO `hr_role` VALUES ('1', '1', '1');
 INSERT INTO `hr_role` VALUES ('2', '2', '2');
 INSERT INTO `hr_role` VALUES ('3', '3', '3');
 INSERT INTO `hr_role` VALUES ('4', '4', '4');
-INSERT INTO `hr_role` VALUES ('5', '5', '5');
-INSERT INTO `hr_role` VALUES ('6', '5', '6');
+INSERT INTO `hr_role` VALUES ('50', '5', '5');
+INSERT INTO `hr_role` VALUES ('51', '5', '6');
+INSERT INTO `hr_role` VALUES ('52', '5', '1');
 
 -- ----------------------------
 -- Table structure for joblevel
@@ -156,7 +106,6 @@ CREATE TABLE `joblevel` (
 -- ----------------------------
 -- Records of joblevel
 -- ----------------------------
-INSERT INTO `joblevel` VALUES ('9', '教授', '正高级', '2018-01-11 21:19:14', '1');
 INSERT INTO `joblevel` VALUES ('10', '副教授', '副高级', '2018-01-11 21:19:20', '1');
 INSERT INTO `joblevel` VALUES ('12', '助教', '初级', '2018-01-11 21:35:39', '1');
 INSERT INTO `joblevel` VALUES ('13', '讲师', '中级', '2018-01-11 22:42:12', '1');
@@ -435,4 +384,41 @@ CREATE TABLE `sysmsg` (
 
 -- ----------------------------
 -- Records of sysmsg
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `name` varchar(10) DEFAULT NULL COMMENT '用户姓名',
+  `gender` char(4) DEFAULT NULL COMMENT '性别',
+  `birthday` date DEFAULT NULL COMMENT '出生日期',
+  `idCard` char(18) DEFAULT NULL COMMENT '身份证号',
+  `nationId` int(8) DEFAULT NULL COMMENT '民族',
+  `nativePlace` varchar(20) DEFAULT NULL COMMENT '籍贯',
+  `politicId` int(8) DEFAULT NULL COMMENT '政治面貌',
+  `email` varchar(20) DEFAULT NULL COMMENT '邮箱',
+  `phone` varchar(11) DEFAULT NULL COMMENT '电话号码',
+  `address` varchar(64) DEFAULT NULL COMMENT '联系地址',
+  `departmentId` int(11) DEFAULT NULL COMMENT '所属部门',
+  `specialty` varchar(32) DEFAULT NULL COMMENT '所属专业',
+  `beginDate` date DEFAULT NULL COMMENT '入学日期',
+  `studentState` enum('在读','毕业') DEFAULT NULL COMMENT '学生状态',
+  `studentID` char(8) DEFAULT NULL COMMENT '学号',
+  `username` varchar(8) NOT NULL DEFAULT '' COMMENT '用户名',
+  `password` varchar(32) NOT NULL DEFAULT '' COMMENT '密码',
+  PRIMARY KEY (`id`),
+  KEY `departmentId` (`departmentId`),
+  KEY `nationId` (`nationId`),
+  KEY `politicId` (`politicId`),
+  KEY `studentID_key` (`studentID`) USING BTREE,
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`departmentId`) REFERENCES `department` (`id`),
+  CONSTRAINT `user_ibfk_4` FOREIGN KEY (`nationId`) REFERENCES `nation` (`id`),
+  CONSTRAINT `user_ibfk_5` FOREIGN KEY (`politicId`) REFERENCES `politicsstatus` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1520 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user
 -- ----------------------------
