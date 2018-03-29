@@ -74,6 +74,11 @@
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 			<version>1.4.1.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>1.2.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>

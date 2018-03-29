@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.lnpu.cns.mapper.PlaceMapper">
+
+    <resultMap id="placeMap" type="cn.edu.lnpu.cns.bean.Place">
+        <id column="id" property="id"/>
+        <result column="placeNameCh" property="placeNameCh"/>
+        <result column="placeNameEn" property="placeNameEn"/>
+        <result column="alias" property="alias"/>
+        <result column="desc" property="desc"/>
+        <result column="createTime" property="createTime"/>
+        <result column="updateTime" property="updateTime"/>
+        <result column="operator" property="operator"/>
+        <result column="yn" property="yn"/>
+    </resultMap>
+
+    <sql id="baseSql">
+        id,placeNameCh,placeNameEn,alias,desc,createTime,updateTime,operator,yn
+    </sql>
+
+    <insert id="inserttOne" parameterType="cn.edu.lnpu.cns.bean.Place">
+        INSERT INTO place VALUES (#{placeNameCh},#{placeNameEn},#{alias},#{desc},#{createTime},#{updateTime},#{operator},#{yn})
+    </insert>
+
+    <delete id="deletePlaceById" parameterType="Long">
+        DELETE FROM place WHERE id = #{id}
+    </delete>
+
+    <update id="updatePlaceByid" parameterType="cn.edu.lnpu.cns.bean.Place">
+        UPDATE place
+        <set>
+            <if test="placeNameCh != null">
+                placeNameCh = #{placeNameCh,jdbcType=VARCHAR}
+            </if>
+            <if test="placeNameEn != null">
+                placeNameEn = #{placeNameEn,jdbcType=VARCHAR}
+            </if>
+            <if test="alias != null">
+                alias = #{alias,jdbcType=VARCHAR}
+            </if>
+            <if test="desc != null">
+                desc = #{desc,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                createTime = #{createTime,jdbcType=VARCHAR}
+            </if>
+            <if test="updateTime != null">
+                updateTime = #{updateTime,jdbcType=VARCHAR}
+            </if>
+            <if test="operator != null">
+                operator = #{operator,jdbcType=VARCHAR}
+            </if>
+            <if test="yn != null">
+                yn = #{yn,jdbcType=VARCHAR}
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="findPlaceCount" parameterType="java.util.Map">
+        SELECT COUNT(id) FROM place
+        WHERE 1=1
+        <if test="searchParam != null">
+           AND placeNameCh LIKE CONCAT('%',#{searchParam},'%')
+        </if>
+        <if test="yn != null">
+            AND yn = #{yn}
+        </if>
+    </select>
+
+    <select id="findPlaceListPage" parameterType="java.util.Map" resultMap="placeMap">
+       SELECT <include refid="baseSql"></include>
+        FROM place
+        WHERE 1=1
+        <if test="searchParam != null">
+            AND placeNameCh LIKE CONCAT('%',#{searchParam},'%')
+        </if>
+        <if test="yn != null">
+            AND yn = #{yn}
+        </if>
+    </select>
+
+    <update id="updateYnById">
+        UPDATE place SET yn = #{yn}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="batchDeleteByIds" parameterType="java.util.List">
+        DELETE FROM place
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
