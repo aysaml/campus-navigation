@@ -17,7 +17,7 @@
     </resultMap>
 
     <sql id="baseSql">
-        id,placeNameCh,placeNameEn,alias,desc,createTime,updateTime,operator,yn
+        id,placeNameCh,placeNameEn,alias,descr,createTime,updateTime,operator,yn
     </sql>
 
     <insert id="inserttOne" parameterType="cn.edu.lnpu.cns.bean.Place">
@@ -59,7 +59,7 @@
         WHERE id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="findPlaceCount" parameterType="java.util.Map">
+    <select id="findPlaceCount" parameterType="java.util.Map" resultType="long">
         SELECT COUNT(id) FROM place
         WHERE 1=1
         <if test="searchParam != null">

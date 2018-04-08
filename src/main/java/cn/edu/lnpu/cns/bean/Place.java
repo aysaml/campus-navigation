@@ -15,7 +15,7 @@ public class Place {
 
     private String alias;
 
-    private String desc;
+    private String descr;
 
     private String createTime;
 
@@ -57,12 +57,12 @@ public class Place {
         this.alias = alias;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescr() {
+        return descr;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescr(String descr) {
+        this.descr = descr;
     }
 
     public String getCreateTime() {
