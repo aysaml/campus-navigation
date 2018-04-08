@@ -3,6 +3,7 @@ package cn.edu.lnpu.cns.controller;
 import cn.edu.lnpu.cns.bean.Place;
 import cn.edu.lnpu.cns.service.PlaceService;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,9 +65,10 @@ public class PlaceController {
    * @return
    */
   @RequestMapping("/update")
-  public int updatePlace(@RequestBody Place place) {
-    if (place == null) {
-      placeService.updatePlaceByid(place);
+  public int updatePlace(@RequestParam("place") String place) {
+    Place place1 = JSON.parseObject(place,Place.class);
+    if (place1 != null) {
+      placeService.updatePlaceByid(place1);
       return 0;
     } else {
       throw new IllegalArgumentException("更新地点不能为空");

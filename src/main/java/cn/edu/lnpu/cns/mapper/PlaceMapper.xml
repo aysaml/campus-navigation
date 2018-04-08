@@ -9,7 +9,7 @@
         <result column="placeNameCh" property="placeNameCh"/>
         <result column="placeNameEn" property="placeNameEn"/>
         <result column="alias" property="alias"/>
-        <result column="desc" property="desc"/>
+        <result column="descr" property="descr"/>
         <result column="createTime" property="createTime"/>
         <result column="updateTime" property="updateTime"/>
         <result column="operator" property="operator"/>
@@ -21,7 +21,7 @@
     </sql>
 
     <insert id="inserttOne" parameterType="cn.edu.lnpu.cns.bean.Place">
-        INSERT INTO place VALUES (#{placeNameCh},#{placeNameEn},#{alias},#{desc},#{createTime},#{updateTime},#{operator},#{yn})
+        INSERT INTO place VALUES (#{placeNameCh},#{placeNameEn},#{alias},#{descr},#{createTime},#{updateTime},#{operator},#{yn})
     </insert>
 
     <delete id="deletePlaceById" parameterType="Long">
@@ -32,25 +32,25 @@
         UPDATE place
         <set>
             <if test="placeNameCh != null">
-                placeNameCh = #{placeNameCh,jdbcType=VARCHAR}
+                placeNameCh = #{placeNameCh,jdbcType=VARCHAR},
             </if>
             <if test="placeNameEn != null">
-                placeNameEn = #{placeNameEn,jdbcType=VARCHAR}
+                placeNameEn = #{placeNameEn,jdbcType=VARCHAR},
             </if>
             <if test="alias != null">
-                alias = #{alias,jdbcType=VARCHAR}
+                alias = #{alias,jdbcType=VARCHAR},
             </if>
-            <if test="desc != null">
-                desc = #{desc,jdbcType=VARCHAR}
+            <if test="descr != null">
+                descr = #{descr,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null">
-                createTime = #{createTime,jdbcType=VARCHAR}
+                createTime = #{createTime,jdbcType=VARCHAR},
             </if>
             <if test="updateTime != null">
-                updateTime = #{updateTime,jdbcType=VARCHAR}
+                updateTime = #{updateTime,jdbcType=VARCHAR},
             </if>
             <if test="operator != null">
-                operator = #{operator,jdbcType=VARCHAR}
+                operator = #{operator,jdbcType=VARCHAR},
             </if>
             <if test="yn != null">
                 yn = #{yn,jdbcType=VARCHAR}

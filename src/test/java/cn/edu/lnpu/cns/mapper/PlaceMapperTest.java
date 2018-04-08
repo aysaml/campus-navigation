@@ -33,4 +33,19 @@ public class PlaceMapperTest {
     long result = placeMapper.findPlaceCount(null);
     System.out.println(result);
   }
+
+  @Test
+  public void updatePlaceById() throws  Exception{
+    Place place = new Place();
+    place.setId(10L);
+    place.setPlaceNameCh("计通学院");
+    place.setPlaceNameEn("jitong");
+    place.setCreateTime("2018-4-1");
+    place.setUpdateTime("2018-4-1");
+    place.setAlias("三生三世十里桃花");
+    place.setDescr("231231");
+    place.setYn(1);
+    place.setOperator("王宁");
+    long result = placeMapper.updatePlaceByid(place);
+  }
 }
