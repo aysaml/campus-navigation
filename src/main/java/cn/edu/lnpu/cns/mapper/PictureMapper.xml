@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.lnpu.cns.mapper.PictureMapper">
+      <resultMap id="pictureMap" type="cn.edu.lnpu.cns.bean.Picture">
+          <id column="id" property="id"/>
+          <result column="url" property="url"/>
+          <result column="picName" property="picName"/>
+          <result column="placeName" property="placeName"/>
+          <result column="remark" property="remark"/>
+          <result column="createTime" property="createTime"/>
+          <result column="updateTime" property="updateTime"/>
+          <result column="operator" property="operator"/>
+          <result column="yn" property="yn"/>
+      </resultMap>
+    <sql id="baseSql">
+        id,url,picName,placeName,remark,createTime,updateTime,operator,yn
+    </sql>
+
+    <insert id="insertOne" parameterType="cn.edu.lnpu.cns.bean.Picture" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO picture (url,picName,placeName,remark,createTime,updateTime,operator,yn)
+        VALUES (#{url},#{picName},#{placeName},#{remark},#{createTime},#{updateTime},#{operator},#{yn})
+    </insert>
+
+    <delete id="deletePictureById" parameterType="Long">
+        DELETE FROM picture WHERE id = #{id}
+    </delete>
+
+    <update id="updatePictureById" parameterType="cn.edu.lnpu.cns.bean.Picture">
+        UPDATE picture
+        <set>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="picName != null">
+                picName = #{picName,jdbcType=VARCHAR},
+            </if>
+            <if test="placeName != null">
+                placeName = #{placeName,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                createTime = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                updateTime = #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="operator != null">
+                operator = #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="yn != null">
+                yn = #{yn,jdbcType=INTEGER}
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="findPictureCount" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(id) FROM picture
+        WHERE 1=1
+        <if test="picName != null">
+            AND picName LIKE CONCAT('%',#{picName},'%')
+        </if>
+        <if test="yn != null">
+            AND yn = #{yn}
+        </if>
+    </select>
+
+    <select id="findPictureListPage" parameterType="java.util.Map" resultType="pictureMap">
+        SELECT <include refid="baseSql"></include>
+        FROM picture
+        WHERE 1=1
+        <if test="picName != null">
+            AND picName LIKE CONCAT('%',#{picName},'%')
+        </if>
+        <if test="yn != null">
+            AND yn = #{yn}
+        </if>
+    </select>
+
+</mapper>
