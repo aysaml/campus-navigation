@@ -69,7 +69,7 @@
         </if>
     </select>
 
-    <select id="findPictureListPage" parameterType="java.util.Map" resultType="pictureMap">
+    <select id="findPictureListPage" parameterType="java.util.Map" resultMap="pictureMap">
         SELECT <include refid="baseSql"></include>
         FROM picture
         WHERE 1=1
