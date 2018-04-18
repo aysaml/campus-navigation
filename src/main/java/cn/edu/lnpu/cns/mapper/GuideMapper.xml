@@ -50,6 +50,13 @@
                 FROM guide g
                 INNER JOIN place p ON g.placeId = p.id
                 INNER JOIN t_user u ON g.userId = u.id
+                WHERE 1 = 1
+                <if test="userName != null">
+                        AND u.userName = #{userName}
+                </if>
+                <if test="placeNameCh != null">
+                        AND p.placeNameCh = #{placeNameCh}
+                </if>
         </select>
 
 </mapper>
