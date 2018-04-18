@@ -6,6 +6,7 @@ import cn.edu.lnpu.cns.service.PictureService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.Map;
  * @since 2018/4/9
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class PictureServiceImpl implements PictureService{
 
     @Autowired

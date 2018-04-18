@@ -16,7 +16,7 @@ import java.util.Map;
  * @since 2018/3/29
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class PlaceServiceImpl implements PlaceService{
 
     @Autowired
