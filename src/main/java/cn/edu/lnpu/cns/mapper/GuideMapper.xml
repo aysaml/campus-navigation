@@ -39,10 +39,10 @@
                 INNER JOIN t_user u ON g.userId = u.id
                 WHERE 1 = 1
                 <if test="userName != null">
-                   AND u.name = #{userName}
+                   AND u.name CONCAT('%',#{userName},'%')
                 </if>
                 <if test="placeNameCh != null">
-                   AND p.placeNameCh = #{placeNameCh}
+                   AND p.placeNameCh LIKE CONCAT('%',#{placeNameCh},'%')
                 </if>
         </select>
 
@@ -53,10 +53,10 @@
                 INNER JOIN t_user u ON g.userId = u.id
                 WHERE 1 = 1
                 <if test="userName != null">
-                        AND u.name = #{userName}
+                        AND u.name LIKE CONCAT('%',#{userName},'%')
                 </if>
                 <if test="placeNameCh != null">
-                        AND p.placeNameCh = #{placeNameCh}
+                        AND p.placeNameCh LIKE CONCAT('%',#{placeNameCh},'%')
                 </if>
         </select>
 
