@@ -15,6 +15,8 @@ public class GuideVo {
 
     private String name;
 
+    private String userName;
+
     private String imgUrl;
 
     private String major;
@@ -57,6 +59,14 @@ public class GuideVo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getImgUrl() {
