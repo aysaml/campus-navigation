@@ -39,7 +39,7 @@
                 INNER JOIN t_user u ON g.userId = u.id
                 WHERE 1 = 1
                 <if test="userName != null">
-                   AND u.userName = #{userName}
+                   AND u.name = #{userName}
                 </if>
                 <if test="placeNameCh != null">
                    AND p.placeNameCh = #{placeNameCh}
@@ -53,7 +53,7 @@
                 INNER JOIN t_user u ON g.userId = u.id
                 WHERE 1 = 1
                 <if test="userName != null">
-                        AND u.userName = #{userName}
+                        AND u.name = #{userName}
                 </if>
                 <if test="placeNameCh != null">
                         AND p.placeNameCh = #{placeNameCh}
