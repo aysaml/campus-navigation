@@ -75,7 +75,7 @@ public class GuideController {
     }
 
     @RequestMapping("/findGuideCount")
-    public long findGuideCount(@RequestParam("usserName") String userName,@RequestParam("placeName") String placeName){
+    public long findGuideCount(@RequestParam("userName") String userName,@RequestParam("placeName") String placeName){
         Map<String,Object> map = new HashMap<String,Object>(2);
         if(userName != null && userName != ""){
             map.put("userName",userName);

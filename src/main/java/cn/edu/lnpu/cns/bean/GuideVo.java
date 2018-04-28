@@ -11,6 +11,8 @@ public class GuideVo {
 
     private Long placeId;
 
+    private String placeNameCh;
+
     private Long userId;
 
     private String name;
@@ -43,6 +45,14 @@ public class GuideVo {
 
     public void setPlaceId(Long placeId) {
         this.placeId = placeId;
+    }
+
+    public String getPlaceNameCh() {
+        return placeNameCh;
+    }
+
+    public void setPlaceNameCh(String placeNameCh) {
+        this.placeNameCh = placeNameCh;
     }
 
     public Long getUserId() {
@@ -89,7 +99,7 @@ public class GuideVo {
         return nativePlace;
     }
 
-    public void setNativePlace(String place) {
+    public void setNativePlace(String nativePlace) {
         this.nativePlace = nativePlace;
     }
 
