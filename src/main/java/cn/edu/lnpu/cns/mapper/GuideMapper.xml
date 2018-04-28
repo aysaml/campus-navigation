@@ -31,7 +31,7 @@
         <update id="updateYnByUserIdAndPlaceId" parameterType="java.util.Map">
                 UPDATE guide SET yn = #{yn}
                 WHERE userId = #{userId}
-                AND WHERE placeId = #{placeId}
+                AND placeId = #{placeId}
         </update>
 
         <select id="findGuideCount" parameterType="java.util.Map" resultType="long">
