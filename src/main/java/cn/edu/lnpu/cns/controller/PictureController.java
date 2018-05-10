@@ -4,9 +4,7 @@ import cn.edu.lnpu.cns.bean.Picture;
 import cn.edu.lnpu.cns.service.PictureService;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -61,11 +59,10 @@ public class PictureController {
      * @param picture
      * @return
      */
-    @RequestMapping("/update")
-    public int updatePicture(@RequestParam("picture") String picture){
-        if(picture != null && picture != ""){
-            Picture picture1 = JSON.parseObject(picture,Picture.class);
-            pictureService.updatePictureById(picture1);
+    @RequestMapping(value="/update")
+    public int updatePicture(@RequestBody Picture picture){
+        if(picture != null){
+            pictureService.updatePictureById(picture);
             return 0;
         }else{
             throw new IllegalArgumentException("更新图片参数错误！");

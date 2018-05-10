@@ -4,6 +4,8 @@ import cn.edu.lnpu.cns.bean.Picture;
 import cn.edu.lnpu.cns.mapper.PictureMapper;
 import cn.edu.lnpu.cns.service.PictureService;
 import com.github.pagehelper.PageHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,8 @@ import java.util.Map;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PictureServiceImpl implements PictureService{
+
+    private final Logger logger = LoggerFactory.getLogger(PictureServiceImpl.class);
 
     @Autowired
     private PictureMapper pictureMapper;
@@ -45,7 +49,14 @@ public class PictureServiceImpl implements PictureService{
      */
     @Override
     public int updatePictureById(Picture picture1) {
-        return pictureMapper.updatePictureById(picture1);
+        int i = 0;
+        try{
+           i =  pictureMapper.updatePictureById(picture1);
+        }catch (Exception e){
+            logger.error("----------------------更新图片异常--------------------：",e);
+            throw new RuntimeException(e);
+        }
+        return i;
     }
 
     /**

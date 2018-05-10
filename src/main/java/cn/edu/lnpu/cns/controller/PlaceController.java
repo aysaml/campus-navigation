@@ -65,10 +65,9 @@ public class PlaceController {
    * @return
    */
   @RequestMapping("/update")
-  public int updatePlace(@RequestParam("place") String place) {
-    if (place != null && place != "") {
-      Place place1 = JSON.parseObject(place,Place.class);
-      placeService.updatePlaceByid(place1);
+  public int updatePlace(@RequestBody Place place) {
+    if (place != null) {
+      placeService.updatePlaceByid(place);
       return 0;
     } else {
       throw new IllegalArgumentException("更新地点不能为空");
