@@ -29,7 +29,7 @@ public class GuideVo {
 
     private String remark;
 
-    private int yn;
+    private boolean yn;
 
     public Long getId() {
         return id;
@@ -119,11 +119,11 @@ public class GuideVo {
         this.remark = remark;
     }
 
-    public int getYn() {
+    public boolean isYn() {
         return yn;
     }
 
-    public void setYn(int yn) {
+    public void setYn(boolean yn) {
         this.yn = yn;
     }
 }

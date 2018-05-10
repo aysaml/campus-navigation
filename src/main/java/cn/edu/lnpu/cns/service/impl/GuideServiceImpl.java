@@ -5,10 +5,13 @@ import cn.edu.lnpu.cns.bean.GuideVo;
 import cn.edu.lnpu.cns.mapper.GuideMapper;
 import cn.edu.lnpu.cns.service.GuideService;
 import com.github.pagehelper.PageHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +25,8 @@ import java.util.Map;
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class GuideServiceImpl implements GuideService{
+
+    private Logger logger = LoggerFactory.getLogger(GuideServiceImpl.class);
 
     @Autowired
     private GuideMapper guideMapper;
@@ -63,10 +68,17 @@ public class GuideServiceImpl implements GuideService{
     @Override
     public int updateYn(String userId, String placeId, String yn) {
         Map map = new HashMap<String,Object>(2);
-        map.put("userId",userId);
-        map.put("placeId",placeId);
-        map.put("yn",yn);
-        return guideMapper.updateYnByUserIdAndPlaceId(map);
+        int i = 0;
+        try{
+            map.put("userId",userId);
+            map.put("placeId",placeId);
+            map.put("yn",yn);
+            i = guideMapper.updateYnByUserIdAndPlaceId(map);
+        }catch (Exception e){
+            logger.error("-------更新导游状态异常------",e);
+            throw new RuntimeException(e);
+        }
+        return i;
     }
 
     /**

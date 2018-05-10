@@ -48,7 +48,7 @@
         </select>
 
         <select id="findGuideListPage" parameterType="java.util.Map" resultMap="guideMap">
-                SELECT g.id,p.id placeId,p.placeNameCh placeNameCh,u.id userId,u.name,u.userName,u.imgUrl,u.major,u.nativePlace native,u.phone,g.remark
+                SELECT g.id,p.id placeId,p.placeNameCh placeNameCh,u.id userId,u.name,u.userName,u.imgUrl,u.major,u.nativePlace native,u.phone,g.remark,g.yn
                 FROM guide g
                 INNER JOIN place p ON g.placeId = p.id
                 INNER JOIN t_user u ON g.userId = u.id
