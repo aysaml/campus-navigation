@@ -30,9 +30,6 @@
     <update id="updatePictureById" parameterType="cn.edu.lnpu.cns.bean.Picture">
         UPDATE picture
         <set>
-            <if test="url != null">
-                url = #{url,jdbcType=VARCHAR},
-            </if>
             <if test="picName != null">
                 picName = #{picName,jdbcType=VARCHAR},
             </if>
