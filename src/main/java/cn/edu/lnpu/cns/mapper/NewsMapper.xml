@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.lnpu.cns.mapper.NewsMapper">
+    <resultMap id="newsMap" type="cn.edu.lnpu.cns.bean.News">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="outline" column="outline" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="imgUrl" column="imgUrl" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="createTime" column="createTime" jdbcType="VARCHAR"/>
+        <result property="yn" column="yn" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="baseSql">
+        id,title,outline,content,imgUrl,author,source,type,createTime,yn
+    </sql>
+
+    <select id="getNewsCountByType" resultType="Integer" parameterType="Integer">
+        select count(id)
+        from t_news
+        where type = #{newsType,jdbcType=INTEGER}
+        and yn = 1
+    </select>
+
+    <select id="getNewsListPageByType" resultMap="newsMap" parameterType="Integer">
+        select <include refid="baseSql"/>
+        from t_news
+        where type = #{newsType,jdbcType=INTEGER}
+        and yn = 1
+    </select>
+
+    <delete id="deleteById" parameterType="Long">
+        delete from t_news
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <update id="updateById" parameterType="cn.edu.lnpu.cns.bean.News">
+        update t_news
+        set title = #{title,jdbcType=VARCHAR},
+        content = #{content,jdbcType=VARCHAR}
+        where id = #{id,jdbcType = BIGINT}
+    </update>
+
+    <insert id="insert" parameterType="cn.edu.lnpu.cns.bean.News" useGeneratedKeys="true">
+        insert into t_news (title,outline,content,imgUrl,author,source,type)values(#{title},#{outline},#{content},#{imgUrl},#{author},#{source},#{type})
+    </insert>
+</mapper>
