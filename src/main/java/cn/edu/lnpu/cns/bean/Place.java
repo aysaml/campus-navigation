@@ -25,6 +25,10 @@ public class Place {
 
     private int yn;
 
+    private int isSchool;
+
+    private int type;
+
     public Long getId() {
         return id;
     }
@@ -95,5 +99,21 @@ public class Place {
 
     public void setYn(int yn) {
         this.yn = yn;
+    }
+
+    public int getIsSchool() {
+        return isSchool;
+    }
+
+    public void setIsSchool(int isSchool) {
+        this.isSchool = isSchool;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

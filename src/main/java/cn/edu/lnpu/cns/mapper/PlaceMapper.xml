@@ -17,7 +17,7 @@
     </resultMap>
 
     <sql id="baseSql">
-        id,placeNameCh,placeNameEn,alias,descr,createTime,updateTime,operator,yn
+        id,placeNameCh,placeNameEn,alias,descr,createTime,updateTime,operator,yn,isSchool,type
     </sql>
 
     <insert id="insertOne" parameterType="cn.edu.lnpu.cns.bean.Place" useGeneratedKeys="true" keyProperty="id">
