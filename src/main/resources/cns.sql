@@ -10,10 +10,35 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-05-30 22:17:52
+Date: 2018-06-05 21:23:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for cns_user_record
+-- ----------------------------
+DROP TABLE IF EXISTS `cns_user_record`;
+CREATE TABLE `cns_user_record` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `behavior` varchar(255) DEFAULT NULL COMMENT '操作',
+  `operator` varchar(255) DEFAULT NULL COMMENT '用户id',
+  `createTime` varchar(255) DEFAULT NULL COMMENT '时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cns_user_record
+-- ----------------------------
+INSERT INTO `cns_user_record` VALUES ('6', '联系导游', 'linyuner', '2018-06-05 18:28:17');
+INSERT INTO `cns_user_record` VALUES ('7', '联系导游', 'linyuner111', '2018-06-05 18:48:22');
+INSERT INTO `cns_user_record` VALUES ('8', '联系导游', 'linyuner111', '2018-06-05 18:48:41');
+INSERT INTO `cns_user_record` VALUES ('9', '联系导游', 'linyuner111', '2018-06-05 18:48:50');
+INSERT INTO `cns_user_record` VALUES ('10', '联系导游', 'linyuner111', '2018-06-05 18:52:36');
+INSERT INTO `cns_user_record` VALUES ('11', '联系导游', 'linyuner111', '2018-06-05 18:52:43');
+INSERT INTO `cns_user_record` VALUES ('12', '联系导游', 'linyuner111', '2018-06-05 18:54:11');
+INSERT INTO `cns_user_record` VALUES ('13', '联系导游', 'linyuner', '2018-06-05 19:21:33');
+INSERT INTO `cns_user_record` VALUES ('14', '联系导游', 'linyuner', '2018-06-05 19:21:48');
 
 -- ----------------------------
 -- Table structure for department
@@ -51,7 +76,7 @@ CREATE TABLE `guide` (
   PRIMARY KEY (`id`),
   KEY `uid` (`userId`) USING BTREE,
   KEY `pid` (`placeId`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='导游表：用户-地点';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='导游表：用户-地点';
 
 -- ----------------------------
 -- Records of guide
@@ -61,6 +86,9 @@ INSERT INTO `guide` VALUES ('2', '2', '1', null, '1');
 INSERT INTO `guide` VALUES ('3', '2', '8', null, '1');
 INSERT INTO `guide` VALUES ('4', '7', '1', '', '0');
 INSERT INTO `guide` VALUES ('5', '4', '1', '', '0');
+INSERT INTO `guide` VALUES ('6', '2', '11', '', '0');
+INSERT INTO `guide` VALUES ('7', '2', '10', '', '0');
+INSERT INTO `guide` VALUES ('8', '1', '1', '', '0');
 
 -- ----------------------------
 -- Table structure for hr
@@ -102,18 +130,18 @@ CREATE TABLE `hr_role` (
   KEY `hr_role_ibfk_1` (`hrid`),
   CONSTRAINT `hr_role_ibfk_1` FOREIGN KEY (`hrid`) REFERENCES `hr` (`id`) ON DELETE CASCADE,
   CONSTRAINT `hr_role_ibfk_2` FOREIGN KEY (`rid`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of hr_role
 -- ----------------------------
 INSERT INTO `hr_role` VALUES ('1', '1', '1');
-INSERT INTO `hr_role` VALUES ('3', '3', '3');
 INSERT INTO `hr_role` VALUES ('50', '5', '5');
 INSERT INTO `hr_role` VALUES ('51', '5', '6');
 INSERT INTO `hr_role` VALUES ('52', '5', '1');
 INSERT INTO `hr_role` VALUES ('61', '2', '2');
 INSERT INTO `hr_role` VALUES ('64', '4', '4');
+INSERT INTO `hr_role` VALUES ('68', '3', '3');
 
 -- ----------------------------
 -- Table structure for joblevel
@@ -169,7 +197,7 @@ INSERT INTO `menu` VALUES ('10', '/guide/manage/**', '/guide/manage', 'GuideMana
 INSERT INTO `menu` VALUES ('11', '/picture/manage/**', '/picture/manage', 'PictureManage', '图片管理', null, null, '1', '4', '1');
 INSERT INTO `menu` VALUES ('12', '/place/manage/**', '/place/manage', 'PlaceManage', '地点管理', null, null, '1', '5', '1');
 INSERT INTO `menu` VALUES ('13', '/system/basic/**', '/sys/basic', 'SysBasic', '基础信息设置', null, null, '1', '6', '1');
-INSERT INTO `menu` VALUES ('14', '/system/log/**', '/sys/log', 'SysLog', '操作日志管理', null, null, '1', '6', '1');
+INSERT INTO `menu` VALUES ('14', '/system/record/**', '/sys/log', 'SysLog', '操作日志管理', null, null, '1', '6', '1');
 INSERT INTO `menu` VALUES ('15', '/system/hr/**', '/sys/hr', 'SysHr', '操作员管理', null, null, '1', '6', '1');
 
 -- ----------------------------
@@ -229,7 +257,6 @@ INSERT INTO `msgcontent` VALUES ('17', '通知标题2', '通知内容2', '2018-0
 INSERT INTO `msgcontent` VALUES ('18', '通知标题3', '通知内容3', '2018-02-03 12:19:41');
 INSERT INTO `msgcontent` VALUES ('19', '测试', '测试。。。。', '2018-03-21 17:34:14');
 INSERT INTO `msgcontent` VALUES ('20', '周五进行操作记录审核', '望各位积极配合！', '2018-03-29 17:36:24');
-INSERT INTO `msgcontent` VALUES ('21', '', '', '2018-04-08 14:54:01');
 INSERT INTO `msgcontent` VALUES ('22', '', '', '2018-05-29 12:00:16');
 
 -- ----------------------------
@@ -488,7 +515,7 @@ INSERT INTO `sysmsg` VALUES ('90', '20', '0', '4', '0');
 INSERT INTO `sysmsg` VALUES ('91', '20', '0', '5', '1');
 INSERT INTO `sysmsg` VALUES ('92', '22', '0', '1', '0');
 INSERT INTO `sysmsg` VALUES ('93', '22', '0', '2', '0');
-INSERT INTO `sysmsg` VALUES ('94', '22', '0', '3', '0');
+INSERT INTO `sysmsg` VALUES ('94', '22', '0', '3', '1');
 INSERT INTO `sysmsg` VALUES ('95', '22', '0', '4', '0');
 INSERT INTO `sysmsg` VALUES ('96', '22', '0', '5', '1');
 
@@ -550,6 +577,7 @@ CREATE TABLE `t_user` (
   `nativePlace` varchar(20) DEFAULT NULL COMMENT '籍贯',
   `politicId` int(8) DEFAULT NULL COMMENT '政治面貌',
   `email` varchar(20) DEFAULT NULL COMMENT '邮箱',
+  `qq` varchar(255) DEFAULT NULL COMMENT 'QQ号码',
   `phone` varchar(11) DEFAULT NULL COMMENT '电话号码',
   `address` varchar(64) DEFAULT NULL COMMENT '联系地址',
   `departmentId` int(11) DEFAULT NULL COMMENT '学院',
@@ -561,20 +589,21 @@ CREATE TABLE `t_user` (
   `password` varchar(255) NOT NULL DEFAULT '' COMMENT '密码',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`) USING HASH,
-  UNIQUE KEY `studentID_key` (`studentID`) USING BTREE,
   KEY `departmentId` (`departmentId`),
   KEY `nationId` (`nationId`),
   KEY `politicId` (`politicId`),
   CONSTRAINT `t_user_ibfk_1` FOREIGN KEY (`departmentId`) REFERENCES `department` (`id`),
   CONSTRAINT `t_user_ibfk_4` FOREIGN KEY (`nationId`) REFERENCES `nation` (`id`),
   CONSTRAINT `t_user_ibfk_5` FOREIGN KEY (`politicId`) REFERENCES `politicsstatus` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
-INSERT INTO `t_user` VALUES ('1', '林允儿', '女', '1995-09-02', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524713823&di=1306f18a3f639931f3307ef59c45689e&imgtype=jpg&er=1&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201502%2F14%2F20150214123546_zHMww.jpeg', '21238880', '1', '韩国首尔', '13', 'linyuner@163.com', '23123', '北京市通州区亦庄经济开发区', '1', '经济管理', '2015-09-01', '0', '1411010211', 'linyuner111', '2313');
-INSERT INTO `t_user` VALUES ('8', '吴宣仪', '女', null, 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527697938433&di=718ddb238994068da2ac102ce4850128&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201609%2F28%2F20160928234655_d2GBk.jpeg', null, null, null, null, null, '1111123', null, null, null, null, '0', null, 'wuxuanyi', '123');
-INSERT INTO `t_user` VALUES ('9', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', null, 'yanglei', '123');
-INSERT INTO `t_user` VALUES ('10', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', null, 'wangning', '123');
-INSERT INTO `t_user` VALUES ('11', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '0', null, 'linyuner', '123');
+INSERT INTO `t_user` VALUES ('1', '林允儿', '女', '1995-09-02', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524713823&di=1306f18a3f639931f3307ef59c45689e&imgtype=jpg&er=1&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201502%2F14%2F20150214123546_zHMww.jpeg', '21238880', '1', '韩国首尔', '13', 'linyuner@163.com', '992901974', '23123', '北京市通州区亦庄经济开发区', '1', '经济管理', '2015-09-01', '0', '1411010211', 'linyuner111', '2313');
+INSERT INTO `t_user` VALUES ('8', '吴宣仪', '女', null, 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1527697938433&di=718ddb238994068da2ac102ce4850128&imgtype=0&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201609%2F28%2F20160928234655_d2GBk.jpeg', null, null, null, null, null, '992901974', '1111123', null, null, null, null, '0', null, 'wuxuanyi', '123');
+INSERT INTO `t_user` VALUES ('9', null, null, null, null, null, null, null, null, null, '992901974', null, null, null, null, null, '0', null, 'yanglei', '123');
+INSERT INTO `t_user` VALUES ('10', null, null, null, null, null, null, null, null, null, '992901974', null, null, null, null, null, '0', null, 'wangning', '123');
+INSERT INTO `t_user` VALUES ('11', '林允儿', '女', null, '/cns/images/head.jpg', null, null, null, null, '', '712731970', null, null, null, null, null, '0', '', 'linyuner', '123');
+INSERT INTO `t_user` VALUES ('12', null, null, null, null, null, null, null, null, null, '712731970', null, null, null, null, null, '0', null, 'wanging113', '1234');
+INSERT INTO `t_user` VALUES ('13', null, null, null, null, null, null, null, null, null, '712731970', null, null, null, null, null, '0', null, 'wangning111', '123');
