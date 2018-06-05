@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.lnpu.cns.mapper.UserRecordMapper">
+
+    <select id="getRecordCount" resultType="Integer">
+        select count(id)
+        from cns_user_record
+    </select>
+
+    <select id="getRecordListPage" resultType="cn.edu.lnpu.cns.bean.UserRecord">
+        select id,behavior,operator,createTime from cns_user_record
+    </select>
+</mapper>
