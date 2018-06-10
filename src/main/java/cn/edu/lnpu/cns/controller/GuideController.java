@@ -44,7 +44,6 @@ public class GuideController {
 
     /**
      * 根据用户id和地点id删除导游
-     * @param id
      * @return
      */
     @RequestMapping("/delete")
@@ -88,7 +87,13 @@ public class GuideController {
         }else{
             map.put("placeNameCh",null);
         }
-        return guideService.findGuideCount(map);
+        long count = 0L;
+        try{
+            count = guideService.findGuideCount(map);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return count;
     }
 
     @RequestMapping("/findGuideListPage")
